@@ -1,0 +1,70 @@
+---
+import { useTranslations } from '../i18n/utils';
+import type { Lang } from '../i18n/translations';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const otherLang = lang === 'vi' ? 'en' : 'vi';
+const switchLabel = lang === 'vi' ? 'EN' : 'VI';
+const switchPath = lang === 'vi' ? '/en' : '/vi';
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-100">
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <!-- Logo -->
+    <a href={`/${lang}`} class="flex items-center gap-2">
+      <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center">
+        <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
+        </svg>
+      </div>
+      <span class="text-xl font-bold bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">Sibl</span>
+    </a>
+
+    <!-- Desktop nav -->
+    <div class="hidden md:flex items-center gap-8">
+      <a href={`/${lang}/#features`} class="text-sm text-gray-600 hover:text-gray-900 transition">{t.nav.features}</a>
+      <a href={`/${lang}/#safety`} class="text-sm text-gray-600 hover:text-gray-900 transition">{t.nav.safety}</a>
+      <a href={`/${lang}/#how`} class="text-sm text-gray-600 hover:text-gray-900 transition">{t.nav.how}</a>
+      <a href={`/${lang}/#pricing`} class="text-sm text-gray-600 hover:text-gray-900 transition">{t.nav.pricing}</a>
+      <a href={`/${lang}/#faq`} class="text-sm text-gray-600 hover:text-gray-900 transition">{t.nav.faq}</a>
+      <a href={switchPath} class="text-xs font-medium text-gray-400 hover:text-gray-600 border border-gray-200 rounded px-2 py-1 transition">{switchLabel}</a>
+      <a href={`/${lang}/#pricing`} class="bg-gradient-to-r from-violet-600 to-indigo-600 text-white text-sm font-medium px-4 py-2 rounded-lg hover:opacity-90 transition">{t.nav.cta}</a>
+    </div>
+
+    <!-- Mobile menu button -->
+    <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-600 hover:text-gray-900">
+      <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 bg-white/95 backdrop-blur-lg">
+    <div class="px-4 py-4 space-y-3">
+      <a href={`/${lang}/#features`} class="block text-sm text-gray-600 hover:text-gray-900 py-2">{t.nav.features}</a>
+      <a href={`/${lang}/#safety`} class="block text-sm text-gray-600 hover:text-gray-900 py-2">{t.nav.safety}</a>
+      <a href={`/${lang}/#how`} class="block text-sm text-gray-600 hover:text-gray-900 py-2">{t.nav.how}</a>
+      <a href={`/${lang}/#pricing`} class="block text-sm text-gray-600 hover:text-gray-900 py-2">{t.nav.pricing}</a>
+      <a href={`/${lang}/#faq`} class="block text-sm text-gray-600 hover:text-gray-900 py-2">{t.nav.faq}</a>
+      <a href={`/${lang}/#pricing`} class="block bg-gradient-to-r from-violet-600 to-indigo-600 text-white text-sm font-medium px-4 py-2 rounded-lg text-center">{t.nav.cta}</a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn?.addEventListener('click', () => {
+    menu?.classList.toggle('hidden');
+  });
+  // Close mobile menu on link click
+  menu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => menu?.classList.add('hidden'));
+  });
+</script>

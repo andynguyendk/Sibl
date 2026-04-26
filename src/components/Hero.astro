@@ -1,0 +1,78 @@
+---
+import { useTranslations } from '../i18n/utils';
+import type { Lang } from '../i18n/translations';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+  <div class="text-center max-w-3xl mx-auto">
+    <!-- Badge -->
+    <div class="inline-flex items-center gap-2 bg-violet-50 border border-violet-200 rounded-full px-4 py-1.5 mb-8">
+      <span class="w-2 h-2 rounded-full bg-violet-500 animate-pulse"></span>
+      <span class="text-sm font-medium text-violet-700">{t.hero.badge}</span>
+    </div>
+
+    <!-- Title -->
+    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+      {t.hero.title.split('\n').map((line, i) => (
+        <span>
+          {i === 1 ? <span class="bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">{line}</span> : line}
+          {i === 0 && <br />}
+        </span>
+      ))}
+    </h1>
+
+    <!-- Subtitle -->
+    <p class="text-lg sm:text-xl text-gray-600 mb-10 whitespace-pre-line">
+      {t.hero.subtitle}
+    </p>
+
+    <!-- CTAs -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href={`/${lang}/#pricing`} class="w-full sm:w-auto bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-semibold px-8 py-3.5 rounded-xl hover:opacity-90 transition shadow-lg shadow-violet-500/25">
+        {t.hero.cta}
+      </a>
+      <a href={`/${lang}/#how`} class="w-full sm:w-auto text-gray-700 font-medium px-8 py-3.5 rounded-xl border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition">
+        {t.hero.secondary}
+      </a>
+    </div>
+
+    <!-- Hero visual -->
+    <div class="mt-16 relative">
+      <div class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent z-10 pointer-events-none"></div>
+      <div class="bg-gradient-to-br from-violet-50 to-indigo-50 rounded-2xl p-8 sm:p-12 border border-violet-100">
+        <div class="flex flex-col sm:flex-row items-start gap-6 max-w-2xl mx-auto">
+          <!-- Kid chat bubble -->
+          <div class="flex-1 w-full">
+            <div class="bg-white rounded-2xl rounded-tl-sm p-4 shadow-sm border border-gray-100">
+              <p class="text-sm text-gray-500 mb-1 font-medium">🧒 {lang === 'vi' ? 'Minh' : 'Minh'}</p>
+              <p class="text-gray-800">{lang === 'vi' ? 'Sibl ơi, tại sao trời lại xanh vậy?' : 'Hey Sibl, why is the sky blue?'}</p>
+            </div>
+          </div>
+          <!-- Sibl reply -->
+          <div class="flex-1 w-full">
+            <div class="bg-gradient-to-br from-violet-500 to-indigo-600 rounded-2xl rounded-tr-sm p-4 text-white">
+              <p class="text-sm text-violet-200 mb-1 font-medium">✨ Sibl</p>
+              <p class="text-violet-50">{lang === 'vi' ? 'Câu hỏi hay quá Minh! Ánh sáng mặt trời có nhiều màu... Để anh/chị giải thích cho em nghe nhé! 🌈' : 'Great question, Minh! Sunlight has many colors... Let me explain! 🌈'}</p>
+            </div>
+          </div>
+        </div>
+        <!-- Parent notification -->
+        <div class="mt-6 max-w-sm mx-auto bg-white rounded-xl p-3 shadow-sm border border-gray-100 flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+          </div>
+          <p class="text-xs text-gray-600">{lang === 'vi' ? '📱 Ba mẹ nhận báo cáo tuần: Minh hỏi về khoa học tự nhiên' : '📱 Weekly report: Minh asked about natural science'}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,72 @@
+---
+import { useTranslations } from '../i18n/utils';
+import type { Lang } from '../i18n/translations';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section id="pricing" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-4">{t.pricing.title}</h2>
+      <p class="text-gray-600 max-w-xl mx-auto">{t.pricing.subtitle}</p>
+    </div>
+    <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+      <!-- Free -->
+      <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm">
+        <h3 class="text-lg font-semibold mb-1">{t.pricing.free.name}</h3>
+        <p class="text-sm text-gray-500 mb-6">{t.pricing.free.desc}</p>
+        <div class="mb-6">
+          <span class="text-4xl font-bold">{t.pricing.free.price}</span>
+          <span class="text-gray-500">{t.pricing.free.period}</span>
+        </div>
+        <ul class="space-y-3 mb-8">
+          {t.pricing.free.features.map((f) => (
+            <li class="flex items-center gap-3 text-sm text-gray-700">
+              <svg class="w-5 h-5 text-violet-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+              </svg>
+              {f}
+            </li>
+          ))}
+        </ul>
+        <a href="#" class="block text-center border border-gray-200 text-gray-700 font-medium px-6 py-3 rounded-xl hover:bg-gray-50 transition">
+          {t.pricing.free.cta}
+        </a>
+      </div>
+
+      <!-- Pro -->
+      <div class="relative bg-white rounded-2xl p-8 border-2 border-violet-500 shadow-lg shadow-violet-500/10">
+        {t.pricing.pro.badge && (
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white text-xs font-semibold px-4 py-1 rounded-full">
+            {t.pricing.pro.badge}
+          </div>
+        )}
+        <h3 class="text-lg font-semibold mb-1">{t.pricing.pro.name}</h3>
+        <p class="text-sm text-gray-500 mb-6">{t.pricing.pro.desc}</p>
+        <div class="mb-6">
+          <span class="text-4xl font-bold bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">{t.pricing.pro.price}</span>
+          <span class="text-gray-500">{t.pricing.pro.period}</span>
+        </div>
+        <ul class="space-y-3 mb-8">
+          {t.pricing.pro.features.map((f) => (
+            <li class="flex items-center gap-3 text-sm text-gray-700">
+              <svg class="w-5 h-5 text-violet-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+              </svg>
+              {f}
+            </li>
+          ))}
+        </ul>
+        <a href="#" class="block text-center bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-medium px-6 py-3 rounded-xl hover:opacity-90 transition shadow-lg shadow-violet-500/25">
+          {t.pricing.pro.cta}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
