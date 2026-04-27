@@ -74,6 +74,62 @@ export const translations = {
         desc: 'Ba mẹ có thể xem lại toàn bộ lịch sử trò chuyện bất cứ lúc nào.',
       },
     },
+    quality: {
+      badge: 'Chất lượng được đảm bảo bởi con người',
+      title: 'AI trả lời, con người kiểm duyệt',
+      subtitle: 'Mỗi câu trả lời đều được rà soát 2 vòng — AI tự động và chuyên viên con người — để đảm bảo chính xác và an toàn cho con.',
+      process: {
+        title: 'Quy trình kiểm duyệt 2 vòng',
+        step1: {
+          label: 'Vòng 1 · AI',
+          title: 'Kiểm tra tự động hàng ngày',
+          desc: 'Hệ thống AI rà soát tất cả câu hỏi-trả lời vào lúc 2h sáng (off-peak). Chấm điểm 5 tiêu chí: tính chính xác, phương pháp sư phạm, độ an toàn, phạm vi nội dung, và tính nhất quán.',
+        },
+        step2: {
+          label: 'Vòng 2 · Con người',
+          title: 'Đội ngũ kiểm duyệt chuyên sâu',
+          desc: 'Các câu trả lời bị AI đánh dấu sẽ được chuyên viên xem xét kỹ. Đội ngũ xác nhận thông tin, điều chỉnh nếu cần, và ghi chú cho báo cáo.',
+        },
+        step3: {
+          label: 'Liên tục cải thiện',
+          title: 'Học từ mỗi phản hồi',
+          desc: 'Những vấn đề phát hiện được dùng để cải thiện chất lượng AI. Càng nhiều dữ liệu, AI càng giỏi — và con được trải nghiệm tốt hơn.',
+        },
+      },
+      scores: {
+        title: '5 tiêu chí đánh giá chất lượng',
+        correctness: {
+          title: 'Tính chính xác',
+          desc: 'Thông tin trả lời có đúng không?',
+        },
+        pedagogy: {
+          title: 'Phương pháp sư phạm',
+          desc: 'Có hướng dẫn con suy nghĩ, không chỉ cho đáp án?',
+        },
+        safety: {
+          title: 'Độ an toàn',
+          desc: 'Phù hợp với lứa tuổi 6-10 không?',
+        },
+        scope: {
+          title: 'Phạm vi nội dung',
+          desc: 'Giữ đúng chủ đề học tập và vui chơi?',
+        },
+        character: {
+          title: 'Nhân cách nhất quán',
+          desc: 'Agent giữ đúng vai trò người bạn đồng hành?',
+        },
+      },
+      trust: {
+        title: 'Tại sao ba mẹ tin tưởng',
+        items: [
+          'Không có câu trả lời nào lọt qua kiểm duyệt',
+          'Báo cáo chi tiết hàng tuần về chất lượng',
+          'Đội ngũ chuyên viên tại Việt Nam',
+          'Tiêu chuẩn đánh giá rõ ràng, minh bạch',
+          'Phản hồi liên tục dựa trên dữ liệu thực',
+        ],
+      },
+    },
     how: {
       title: '3 bước bắt đầu',
       subtitle: 'Đơn giản như 1-2-3',
@@ -354,6 +410,62 @@ export const translations = {
       transparent: {
         title: 'Full transparency',
         desc: 'Parents can review the entire conversation history at any time.',
+      },
+    },
+    quality: {
+      badge: 'Quality backed by humans',
+      title: 'AI answers, humans verify',
+      subtitle: 'Every response goes through a 2-round review — AI automated and human moderators — to ensure accuracy and safety for your child.',
+      process: {
+        title: '2-round review process',
+        step1: {
+          label: 'Round 1 · AI',
+          title: 'Automated daily review',
+          desc: 'AI reviews all conversations nightly (off-peak). Scores each response on 5 criteria: factual correctness, pedagogy, safety, scope, and character consistency.',
+        },
+        step2: {
+          label: 'Round 2 · Human',
+          title: 'Expert moderation team',
+          desc: 'AI-flagged responses are reviewed by human moderators who verify facts, adjust if needed, and add notes for the weekly report.',
+        },
+        step3: {
+          label: 'Continuous',
+          title: 'Learning from every review',
+          desc: 'Issues found are fed back to improve the AI. More data means better quality — and a better experience for your child.',
+        },
+      },
+      scores: {
+        title: '5 quality scoring criteria',
+        correctness: {
+          title: 'Correctness',
+          desc: 'Is the information factually accurate?',
+        },
+        pedagogy: {
+          title: 'Pedagogy',
+          desc: 'Does it guide thinking, not just give answers?',
+        },
+        safety: {
+          title: 'Safety',
+          desc: 'Age-appropriate for 6-10 year olds?',
+        },
+        scope: {
+          title: 'Scope',
+          desc: 'Stays on learning and fun topics?',
+        },
+        character: {
+          title: 'Character',
+          desc: 'Consistent as the child\'s buddy?',
+        },
+      },
+      trust: {
+        title: 'Why parents trust us',
+        items: [
+          'No response goes unreviewed',
+          'Detailed weekly quality reports',
+          'Human moderation team based in Vietnam',
+          'Clear, transparent scoring standards',
+          'Continuous improvement from real data',
+        ],
       },
     },
     how: {

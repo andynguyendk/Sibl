@@ -1,0 +1,151 @@
+---
+import { useTranslations } from '../i18n/utils';
+import type { Lang } from '../i18n/translations';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const steps = [
+  {
+    num: '1',
+    label: t.quality.process.step1.label,
+    title: t.quality.process.step1.title,
+    desc: t.quality.process.step1.desc,
+    color: 'blue',
+  },
+  {
+    num: '2',
+    label: t.quality.process.step2.label,
+    title: t.quality.process.step2.title,
+    desc: t.quality.process.step2.desc,
+    color: 'amber',
+  },
+  {
+    num: '3',
+    label: t.quality.process.step3.label,
+    title: t.quality.process.step3.title,
+    desc: t.quality.process.step3.desc,
+    color: 'green',
+  },
+];
+
+const scores = [
+  {
+    key: 'correctness',
+    title: t.quality.scores.correctness.title,
+    desc: t.quality.scores.correctness.desc,
+    icon: '✓',
+    color: 'bg-blue-50 text-blue-600 border-blue-100',
+  },
+  {
+    key: 'pedagogy',
+    title: t.quality.scores.pedagogy.title,
+    desc: t.quality.scores.pedagogy.desc,
+    icon: '📚',
+    color: 'bg-purple-50 text-purple-600 border-purple-100',
+  },
+  {
+    key: 'safety',
+    title: t.quality.scores.safety.title,
+    desc: t.quality.scores.safety.desc,
+    icon: '🛡️',
+    color: 'bg-green-50 text-green-600 border-green-100',
+  },
+  {
+    key: 'scope',
+    title: t.quality.scores.scope.title,
+    desc: t.quality.scores.scope.desc,
+    icon: '🎯',
+    color: 'bg-orange-50 text-orange-600 border-orange-100',
+  },
+  {
+    key: 'character',
+    title: t.quality.scores.character.title,
+    desc: t.quality.scores.character.desc,
+    icon: '🤝',
+    color: 'bg-pink-50 text-pink-600 border-pink-100',
+  },
+];
+---
+
+<section id="quality" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+  <div class="max-w-6xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 rounded-full px-4 py-1.5 mb-6">
+        <svg class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
+        </svg>
+        <span class="text-sm font-medium text-blue-700">{t.quality.badge}</span>
+      </div>
+      <h2 class="text-2xl sm:text-3xl font-bold mb-4">{t.quality.title}</h2>
+      <p class="text-gray-600 max-w-2xl mx-auto">{t.quality.subtitle}</p>
+    </div>
+
+    <!-- 2-Round Process -->
+    <div class="mb-20">
+      <h3 class="text-lg font-semibold text-center mb-10 text-gray-800">{t.quality.process.title}</h3>
+      <div class="relative">
+        <!-- Connecting line -->
+        <div class="hidden lg:block absolute top-12 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-200 via-amber-200 to-green-200" />
+        
+        <div class="grid lg:grid-cols-3 gap-8">
+          {steps.map((step, i) => (
+            <div class="relative">
+              <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                <!-- Step number + label -->
+                <div class="flex items-center gap-3 mb-4">
+                  <div class={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm ${
+                    step.color === 'blue' ? 'bg-blue-500' : step.color === 'amber' ? 'bg-amber-500' : 'bg-green-500'
+                  }`}>
+                    {step.num}
+                  </div>
+                  <span class={`text-xs font-semibold px-2.5 py-1 rounded-full ${
+                    step.color === 'blue' ? 'bg-blue-50 text-blue-600' : step.color === 'amber' ? 'bg-amber-50 text-amber-600' : 'bg-green-50 text-green-600'
+                  }`}>
+                    {step.label}
+                  </span>
+                </div>
+                <h4 class="text-base font-semibold mb-2">{step.title}</h4>
+                <p class="text-gray-600 text-sm leading-relaxed">{step.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 Scoring Criteria -->
+    <div class="mb-20">
+      <h3 class="text-lg font-semibold text-center mb-10 text-gray-800">{t.quality.scores.title}</h3>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        {scores.map((score) => (
+          <div class={`rounded-xl p-5 border ${score.color} text-center`}>
+            <div class="text-2xl mb-2">{score.icon}</div>
+            <h4 class="font-semibold text-sm mb-1">{score.title}</h4>
+            <p class="text-xs opacity-75 leading-relaxed">{score.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Trust Points -->
+    <div class="bg-gradient-to-br from-gray-50 to-blue-50 rounded-2xl p-8 sm:p-10 border border-gray-100">
+      <h3 class="text-lg font-semibold mb-6 text-gray-800">{t.quality.trust.title}</h3>
+      <div class="grid sm:grid-cols-2 gap-4">
+        {t.quality.trust.items.map((item: string) => (
+          <div class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            <span class="text-gray-700 text-sm">{item}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
