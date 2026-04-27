@@ -1,0 +1,11 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Terms from '../../components/Terms.astro';
+import { useTranslations } from '../../i18n/utils';
+const lang = 'en';
+const t = useTranslations(lang);
+---
+
+<Layout title={t.terms.title} lang={lang}>
+  <Terms lang={lang} />
+</Layout>
