@@ -192,6 +192,16 @@ export const translations = {
     },
     signup: {
       stepIndicator: (step: number, total: number) => `Bước ${step} / ${total}`,
+      step0: {
+        title: 'Tài khoản phụ huynh',
+        subtitle: 'Để nhận báo cáo và quản lý tài khoản',
+        email: 'Email',
+        emailPlaceholder: 'Ví dụ: minhme@gmail.com',
+        phone: 'Số điện thoại',
+        phonePlaceholder: 'Ví dụ: 0901 234 567',
+        atLeastOne: 'Cần ít nhất email hoặc số điện thoại',
+        invalidEmail: 'Email không hợp lệ',
+      },
       step1: {
         title: 'Hồ sơ của bé',
         subtitle: 'Cho chúng tôi biết về con bạn',
@@ -234,6 +244,7 @@ export const translations = {
         subtitle: 'Kiểm tra lại thông tin',
         summary: 'Tóm tắt',
         kidProfile: 'Hồ sơ bé',
+        account: 'Tài khoản',
         agentProfile: 'AI Buddy',
         personality: 'Tính cách',
         strictness: 'Tính nghiêm',
@@ -530,6 +541,16 @@ export const translations = {
     },
     signup: {
       stepIndicator: (step: number, total: number) => `Step ${step} of ${total}`,
+      step0: {
+        title: 'Parent account',
+        subtitle: 'To receive reports and manage your account',
+        email: 'Email',
+        emailPlaceholder: 'e.g. minhme@gmail.com',
+        phone: 'Phone number',
+        phonePlaceholder: 'e.g. 0901 234 567',
+        atLeastOne: 'Email or phone number is required',
+        invalidEmail: 'Invalid email address',
+      },
       step1: {
         title: "Your child's profile",
         subtitle: 'Tell us about your child',
@@ -572,6 +593,7 @@ export const translations = {
         subtitle: 'Review your choices',
         summary: 'Summary',
         kidProfile: "Child's profile",
+        account: 'Account',
         agentProfile: 'AI Buddy',
         personality: 'Personality',
         strictness: 'Strictness',

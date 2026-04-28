@@ -9,6 +9,8 @@ interface SignupProps {
 }
 
 interface FormData {
+  parentEmail: string;
+  parentPhone: string;
   kidName: string;
   kidAge: string;
   kidGrade: string;
@@ -21,6 +23,8 @@ interface FormData {
 }
 
 const initialForm: FormData = {
+  parentEmail: '',
+  parentPhone: '',
   kidName: '',
   kidAge: '',
   kidGrade: '',
@@ -33,17 +37,22 @@ const initialForm: FormData = {
 };
 
 export default function SignupForm({ lang }: SignupProps) {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0);
   const [form, setForm] = useState<FormData>(initialForm);
   const [submitting, setSubmitting] = useState(false);
   const t = translations[lang].signup;
-  const totalSteps = 4;
+  const totalSteps = 5;
 
   const update = (field: keyof FormData, value: string | number | boolean) =>
     setForm((f) => ({ ...f, [field]: value }));
 
   const canProceed = () => {
     switch (step) {
+      case 0: {
+        const hasOne = form.parentEmail.trim() !== '' || form.parentPhone.trim() !== '';
+        const emailValid = form.parentEmail.trim() === '' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.parentEmail.trim());
+        return hasOne && emailValid;
+      }
       case 1: return form.kidName.trim() !== '' && form.kidAge.trim() !== '';
       case 2: return form.agentName.trim() !== '';
       case 3: return true;
@@ -60,7 +69,7 @@ export default function SignupForm({ lang }: SignupProps) {
     alert(lang === 'vi' ? 'Đã tạo thành công! (demo)' : 'Created successfully! (demo)');
   };
 
-  const progress = ((step - 1) / (totalSteps - 1)) * 100;
+  const progress = (step / (totalSteps - 1)) * 100;
 
   return (
     <div class="max-w-lg mx-auto">
@@ -68,7 +77,7 @@ export default function SignupForm({ lang }: SignupProps) {
       <div class="mb-8">
         <div class="flex justify-between items-center mb-2">
           <span class="text-sm font-medium text-violet-600">
-            {t.stepIndicator(step, totalSteps)}
+            {t.stepIndicator(step + 1, totalSteps)}
           </span>
           <span class="text-sm text-gray-400">{Math.round(progress)}%</span>
         </div>
@@ -79,6 +88,47 @@ export default function SignupForm({ lang }: SignupProps) {
           />
         </div>
       </div>
+
+      {/* Step 0: Parent Account */}
+      {step === 0 && (
+        <div class="space-y-5">
+          <div>
+            <h2 class="text-2xl font-bold mb-1">{t.step0.title}</h2>
+            <p class="text-gray-500">{t.step0.subtitle}</p>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">{t.step0.email}</label>
+            <input
+              type="email"
+              value={form.parentEmail}
+              onInput={(e) => update('parentEmail', (e.target as HTMLInputElement).value)}
+              placeholder={t.step0.emailPlaceholder}
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-violet-400 focus:ring-2 focus:ring-violet-100 outline-none transition"
+            />
+            {form.parentEmail.trim() !== '' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.parentEmail.trim()) && (
+              <p class="text-xs text-red-500 mt-1">{t.step0.invalidEmail}</p>
+            )}
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">{t.step0.phone}</label>
+            <input
+              type="tel"
+              value={form.parentPhone}
+              onInput={(e) => update('parentPhone', (e.target as HTMLInputElement).value)}
+              placeholder={t.step0.phonePlaceholder}
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-violet-400 focus:ring-2 focus:ring-violet-100 outline-none transition"
+            />
+          </div>
+
+          {form.parentEmail.trim() === '' && form.parentPhone.trim() === '' && (
+            <p class="text-xs text-red-500">{t.step0.atLeastOne}</p>
+          )}
+
+          <p class="text-xs text-gray-400">🔒 {lang === 'vi' ? 'Thông tin chỉ dùng để gửi báo cáo và quản lý tài khoản' : 'Only used for reports and account management'}</p>
+        </div>
+      )}
 
       {/* Step 1: Kid's Profile */}
       {step === 1 && (
@@ -267,6 +317,17 @@ export default function SignupForm({ lang }: SignupProps) {
           <div class="space-y-3">
             <div class="bg-white rounded-xl border border-gray-200 p-4">
               <div class="flex justify-between items-center mb-2">
+                <span class="text-sm font-semibold text-gray-700">{t.step4.account}</span>
+                <button type="button" onClick={() => setStep(0)} class="text-xs text-violet-600 hover:text-violet-700 font-medium">{t.step4.editBtn}</button>
+              </div>
+              <div class="text-sm text-gray-600 space-y-1">
+                {form.parentEmail && <p>📧 {form.parentEmail}</p>}
+                {form.parentPhone && <p>📱 {form.parentPhone}</p>}
+              </div>
+            </div>
+
+            <div class="bg-white rounded-xl border border-gray-200 p-4">
+              <div class="flex justify-between items-center mb-2">
                 <span class="text-sm font-semibold text-gray-700">{t.step4.kidProfile}</span>
                 <button type="button" onClick={() => setStep(1)} class="text-xs text-violet-600 hover:text-violet-700 font-medium">{t.step4.editBtn}</button>
               </div>
@@ -313,7 +374,7 @@ export default function SignupForm({ lang }: SignupProps) {
 
       {/* Navigation buttons */}
       <div class="flex justify-between mt-8">
-        {step > 1 ? (
+        {step > 0 ? (
           <button
             type="button"
             onClick={() => setStep(step - 1)}
